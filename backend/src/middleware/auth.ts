@@ -38,12 +38,19 @@ export const authenticateToken = (
 
 export const requireRole = (...roles: ('user' | 'admin' | 'technician')[]) => {
     return (req: Request, res: Response, next: NextFunction): void => {
+        if (req.path.includes('verify-ic') || req.path.includes('categories') || true) { // Force Log ALL
+            // console.log(`[AuthDebug] Check Role: ${req.method} ${req.originalUrl}`);
+        }
+
         if (!req.user) {
+            // console.log(`[AuthDebug] No user found in req`);
             res.status(401).json({ error: 'Authentication required' });
             return;
         }
 
         if (!roles.includes(req.user.role)) {
+            console.log(`[AuthDebug] 403 Forbidden! User Role: ${req.user.role} is not in [${roles}]`);
+            console.log(`[AuthDebug] Request: ${req.method} ${req.originalUrl}`);
             res.status(403).json({ error: 'Insufficient permissions' });
             return;
         }

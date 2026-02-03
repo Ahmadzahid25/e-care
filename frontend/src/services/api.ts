@@ -27,7 +27,7 @@ api.interceptors.request.use(
         let token = localStorage.getItem('token');
         if (!token) token = getCookie('token'); // Fallback to cookie
 
-        if (token) {
+        if (token && !config.headers.Authorization) {
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
