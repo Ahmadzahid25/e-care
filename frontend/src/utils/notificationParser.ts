@@ -25,7 +25,7 @@ export const parseNotificationMessage = (rawMessage: string | null | undefined, 
         if (parsed && parsed.key) {
             // 2. If valid JSON with key, translate using i18next
             // Using t function with params spread
-            return t(`notification.${parsed.key}`, { ...parsed.params });
+            return t(`notification.${parsed.key}`, { ...parsed.params }) as string;
         }
     } catch (e) {
         // 3. Fallback: If parsing fails (Legislated/Legacy Data), return original string
