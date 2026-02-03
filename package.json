@@ -1,0 +1,17 @@
+{
+    "name": "ecare-monorepo",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "frontend",
+        "backend"
+    ],
+    "scripts": {
+        "install-all": "npm install",
+        "dev": "echo 'Run backend and frontend separately in their folders for now'",
+        "build": "cd frontend && npm run build"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.3"
+    }
+}
