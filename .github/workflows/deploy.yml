@@ -1,0 +1,24 @@
+name: CI/CD Deploy E-Care
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-frontend:
+    runs-on: [self-hosted, frontend]
+    steps:
+      - name: Update Frontend
+        run: |
+          cd /usr/share/nginx/html/frontend
+          git pull origin main
+          docker-compose up -d --build
+
+  deploy-backend:
+    runs-on: [self-hosted, backend]
+    steps:
+      - name: Update Backend
+        run: |
+          cd /root/e-care/backend
+          git pull origin main
+          docker-compose up -d --build
